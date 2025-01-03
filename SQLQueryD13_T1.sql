@@ -50,21 +50,21 @@ select UPPER(StudentName) from CodedT13.Student
 go -- Q12
 select LOWER(StudentName) from CodedT13.Student
 go -- Q15
-select s.StudentID		as 'ID',
-	   s.StudentName	as 'Name',
-	   s.Email          as 'Email',
-	   s.Age            as 'Age',
-	   s.Gender         as 'Gender',
-	   c.CourseID		as 'Course ID', 
-	   c.CourseName		as 'Course Name'
+select s.StudentID              as 'ID',
+	   s.StudentName        as 'Name',
+	   s.Email              as 'Email',
+	   s.Age                as 'Age',
+	   s.Gender             as 'Gender',
+	   c.CourseID           as 'Course ID', 
+	   c.CourseName         as 'Course Name'
 from CodedT13.Student as s join CodedT13.Courses as c
 on s.StudentID = c.StID
 go -- Q16
 insert into CodedT13.Student values('Sam', 24, 'o@pm.kw', 'Male'),
-								   ('Vi', 20, 'v@pm.ru', 'Female')
+	                           ('Vi', 20, 'v@pm.ru', 'Female')
 go
 insert into CodedT13.Courses values('Physics', 4),
-								   ('c#', 4),
+                                   ('c#', 4),
                                    ('Sport', 5)
 								   
 go -- Q17
@@ -78,11 +78,11 @@ create proc PrintNameNCourse as (
 go
 exec PrintNameNCourse
 go -- Q22
-create proc PrintNameNCourseById as (
-	select StudentName, CourseName from CodedT13.Student as s join CodedT13.Courses as c on s.StudentID = c.StID
+create proc PrintNameNCourseById(@StudentID int) as (
+	select StudentName, CourseName from CodedT13.Student as s join CodedT13.Courses as c on s.StudentID = c.StID where StudentID = @StudentID
 )
 go
-exec PrintNameNCourse
+exec PrintNameNCourseById @StudentID= 5
 go
 select * from CodedT13.Courses
 select * from CodedT13.Student
@@ -113,32 +113,32 @@ create table CodedT13.Enrollment2(
 go
 --========================================================================
 insert into CodedT13.Student2 values('Alice', 20, 'alice@example.com', 'Female'),
-									('Bob', 21, 'bob@example.com', 'Male'),
-									('Charlie', 22, 'charlie@example.com', 'Male'),
-									('Diana', 23, 'diana@example.com', 'Female'),
-									('Eve', 20, 'eve@example.com', 'Female')
+                                    ('Bob', 21, 'bob@example.com', 'Male'),
+                                    ('Charlie', 22, 'charlie@example.com', 'Male'),
+                                    ('Diana', 23, 'diana@example.com', 'Female'),
+                                    ('Eve', 20, 'eve@example.com', 'Female')
 go
 insert into CodedT13.Courses2 values('Math'),
-								    ('Physics'),
-								    ('Chemistry'),
-								    ('Biology'),
-									('Computer Science')
+                                    ('Physics'),
+                                    ('Chemistry'),
+                                    ('Biology'),
+                                    ('Computer Science')
 go
 insert into CodedT13.Enrollment2 values(1, 1),
-									   (1, 2),
-									   (2, 1),
-									   (2, 3),
-									   (3, 4),
-									   (3, 5),
-									   (4, 2),
-									   (4, 3),
-									   (5, 5)
+                                       (1, 2),
+                                       (2, 1),
+                                       (2, 3),
+                                       (3, 4),
+                                       (3, 5),
+                                       (4, 2),
+                                       (4, 3),
+                                       (5, 5)
 go
 select s2.StudentID		 as 'ID',
 	   s2.StudentName	 as 'Name',
-	   s2.Email          as 'Email',
-	   s2.Age            as 'Age',
-	   s2.Gender         as 'Gender',
+	   s2.Email              as 'Email',
+	   s2.Age                as 'Age',
+	   s2.Gender             as 'Gender',
 	   c2.CourseID		 as 'Course ID', 
 	   c2.CourseName	 as 'Course Name'
 from CodedT13.Student2 as s2 join CodedT13.Enrollment2 as e2 
